@@ -92,6 +92,14 @@ function createBot() {
       log.info('Auto-eat enabled.');
     }
 
+    // ---- ADD THIS BULLETPROOF LOOK LOOP HERE ----
+    setInterval(() => {
+      if (bot && bot.entity) {
+        // Forces the bot to look around randomly every 4 seconds
+        bot.look(Math.random() * 360, (Math.random() * 40) - 20);
+      }
+    }, 4000);
+
     // Anti-AFK loop
     stopAntiAfk = startAntiAfk(bot, cfg);
 
