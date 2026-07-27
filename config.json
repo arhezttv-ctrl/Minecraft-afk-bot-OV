@@ -1,7 +1,7 @@
 {
   "server": {
     "host": "OldVageen.aternos.me",
-    "port": null,
+    "port": 61458,
     "version": "1.21.4"
   },
   "bot": {
