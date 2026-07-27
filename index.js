@@ -24,7 +24,6 @@ const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 // Allow environment variables to override sensitive/deployment-specific values
 if (process.env.MC_HOST) cfg.server.host = process.env.MC_HOST;
-if (process.env.MC_PORT) cfg.server.port = Number(process.env.MC_PORT);
 if (process.env.MC_VERSION) cfg.server.version = process.env.MC_VERSION;
 if (process.env.MC_USERNAME) cfg.bot.username = process.env.MC_USERNAME;
 if (process.env.MC_AUTH) cfg.bot.auth = process.env.MC_AUTH;
@@ -49,11 +48,10 @@ function getStats() {
 }
 
 function createBot() {
-  log.info(`Connecting to ${cfg.server.host}:${cfg.server.port} as ${cfg.bot.username}...`);
+  log.info(`Connecting to ${cfg.server.host} as ${cfg.bot.username}...`);
 
  const options = {
     host: cfg.server.host,
-    port: cfg.server.port,
     username: cfg.bot.username,
     auth: cfg.bot.auth || 'offline'
   };
