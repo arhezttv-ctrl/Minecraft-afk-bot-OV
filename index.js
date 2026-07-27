@@ -99,7 +99,27 @@ function createBot() {
         bot.look(Math.random() * 360, (Math.random() * 40) - 20);
       }
     }, 4000);
+ 
+    // ---- BULLETPROOF PHYSICS MOVEMENT LOOP ----
+    let walking = false;
+    setInterval(() => {
+      if (bot && bot.entity) {
+        // 1. Make the bot look around randomly
+        bot.look(Math.random() * 360, (Math.random() * 40) - 20);
 
+        // 2. Alternate walking forward and backward to trigger block movement
+        walking = !walking;
+        bot.setControlState('forward', walking);
+        bot.setControlState('back', !walking);
+        
+        // 3. Briefly jump occasionally to clear minor block snags
+        if (Math.random() > 0.5) {
+          bot.setControlState('jump', true);
+          setTimeout(() => bot.setControlState('jump', false), 500);
+        }
+      }
+    }, 5000); // Triggers every 5 seconds
+    
     // Anti-AFK loop
     stopAntiAfk = startAntiAfk(bot, cfg);
 
